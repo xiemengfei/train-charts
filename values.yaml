@@ -1,0 +1,51 @@
+# @Author: nickchen
+# @Date:   2020-08-07T08:20:24+08:00
+# @Last modified by:   nickchen
+# @Last modified time: 2020-08-07T14:37:10+08:00
+#全局
+global:
+  replicas: 1
+  image:
+    registry:
+    tag: v_1
+    #namespace: nickchen
+    pullsecrets:
+
+#eurekaserver配置
+eurekaserver:
+  enabled: true
+  ingress:
+    enabled: false
+    # Used to create an Ingress record.
+    hosts:
+      eureka: eurekaserver.default.net
+
+#service-hello配置
+servicehello:
+  enabled: true
+  message:
+    name: nickchen
+  ingress:
+    enabled: false
+    # Used to create an Ingress record.
+    hosts:
+      hello: servicehello.default.net
+
+#xcx配置
+xcx:
+  enabled: true
+  message:
+    nickname: haomingshi
+  ingress:
+    enabled: false
+    # Used to create an Ingress record.
+
+
+#lbl-front配置
+lblfront:
+  enabled: true
+  ingress:
+    enabled: false
+    # Used to create an Ingress record.
+
+

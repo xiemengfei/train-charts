@@ -1,0 +1,35 @@
+# @Author: nickchen
+# @Date:   2020-08-07T08:27:03+08:00
+# @Last modified by:   nickchen
+# @Last modified time: 2020-08-07T09:21:56+08:00
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eurekaserver
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: eurekaserver
+      release: {{ .Release.Name }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eurekaserver
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: eurekaserver
+        image: {{ .Values.global.image.registry }}/eurekaserver:{{ .Values.global.image.tag }}
+        #image: {{ .Values.global.image.namespace }}:{{ .Values.global.image.tag }}
+        imagePullPolicy: Always
+        ports:
+          - containerPort: {{ .Values.eurekaserverPort }}
+            name: eurekaserver
+      dnsPolicy: ClusterFirst
+      {{ if .Values.global.image.pullsecrets }}
+      imagePullSecrets:
+      - name: {{ .Values.global.image.pullsecrets }}
+      {{ end }}
+      restartPolicy: Always

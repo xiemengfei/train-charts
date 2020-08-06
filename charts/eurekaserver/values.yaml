@@ -1,0 +1,12 @@
+# @Author: nickchen
+# @Date:   2020-08-07T08:20:24+08:00
+# @Last modified by:   nickchen
+# @Last modified time: 2020-08-07T09:52:34+08:00
+
+ingress:
+  enabled: false
+  # Used to create an Ingress record.
+  hosts:
+    eureka: eurekaserver.default.net
+
+eurekaserverPort: 8761

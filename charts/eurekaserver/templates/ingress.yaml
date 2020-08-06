@@ -1,0 +1,48 @@
+# @Author: nickchen
+# @Date:   2020-08-07T08:28:31+08:00
+# @Last modified by:   nickchen
+# @Last modified time: 2020-08-07T13:55:55+08:00
+
+# @Author: nickchen
+# @Date:   2020-07-27T19:06:34+08:00
+# @Last modified by:   nickchen
+# @Last modified time: 2020-08-07T13:55:55+08:00
+
+
+{{- if .Values.ingress.enabled -}}
+{{- $servicePort := .Values.eurekaserverPort -}}
+{{- $host := .Values.ingress.hosts.eureka }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: eurekaserver
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: eurekaserver
+    release: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx" # 绑定ingress-class
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
+    nginx.ingress.kubernetes.io/upstream-hash-by: "$http_x_forwarded_for" # 以客户端IP哈希
+    # nginx只支持 cookie 类型
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    # 自定义黏性cookie的名字，默认为 INGRESSCOOKIE
+    #nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    # 配置黏性cookie的path，但好像不生效
+    #nginx.ingress.kubernetes.io/session-cookie-path: "/"
+    # 对应于 Max-Age
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    # 对应于 Expires
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+spec:
+  rules:
+    - host: {{ $host }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: eurekaserver
+              servicePort: {{ $servicePort }}
+{{- end -}}

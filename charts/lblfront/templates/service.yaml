@@ -1,0 +1,21 @@
+# @Author: nickchen
+# @Date:   2020-08-07T08:27:51+08:00
+# @Last modified by:   nickchen
+# @Last modified time: 2020-08-07T08:42:24+08:00
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: lbl-front
+    release: {{ .Release.Name }}
+  name: lbl-front
+  namespace: {{ .Release.Namespace }}
+spec:
+  ports:
+  - name: lbl-front
+    port: {{ .Values.lblfrontPort }}
+    targetPort: lbl-front
+  type: ClusterIP
+  selector:
+    app: lbl-front
+    release: {{ .Release.Name }}

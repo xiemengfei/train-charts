@@ -1,0 +1,21 @@
+# @Author: nickchen
+# @Date:   2020-08-07T08:27:51+08:00
+# @Last modified by:   nickchen
+# @Last modified time: 2020-08-07T08:42:24+08:00
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: eurekaserver
+    release: {{ .Release.Name }}
+  name: eurekaserver
+  namespace: {{ .Release.Namespace }}
+spec:
+  ports:
+  - name: eurekaserver
+    port: {{ .Values.eurekaserverPort }}
+    targetPort: eurekaserver
+  type: ClusterIP
+  selector:
+    app: eurekaserver
+    release: {{ .Release.Name }}

@@ -1,0 +1,23 @@
+apiVersion: v2
+appVersion: 1.16.0
+dependencies:
+- condition: eurekaserver.enabled
+  name: eurekaserver
+  repository: file://./charts/eurekaserver
+  version: 0.1.0
+- condition: servicehello.enabled
+  name: servicehello
+  repository: file://./charts/servicehello
+  version: 0.1.0
+- condition: xcx.enabled
+  name: xcx
+  repository: file://./charts/xcx
+  version: 0.1.0
+- condition: lblfront.enabled
+  name: lblfront
+  repository: file://./charts/lblfront
+  version: 0.1.0
+description: A Helm chart for train
+name: train-nickchen
+type: application
+version: 0.1.1

@@ -1,0 +1,16 @@
+# @Author: nickchen
+# @Date:   2020-08-07T14:09:21+08:00
+# @Last modified by:   nickchen
+# @Last modified time: 2020-08-07T14:32:19+08:00
+
+apiVersion: v1
+data:
+  eureka_host: http://eurekaserver:8761/eureka/
+  message_name: {{ .Values.message.name | quote }}
+kind: ConfigMap
+metadata:
+  labels:
+    app: service-hello
+    release: {{ .Release.Name }}
+  name: service-hello
+  namespace: {{ .Release.Namespace }}

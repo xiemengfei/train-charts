@@ -1,0 +1,22 @@
+# @Author: nickchen
+# @Date:   2020-08-07T08:28:13+08:00
+# @Last modified by:   nickchen
+# @Last modified time: 2020-08-07T13:56:54+08:00
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: lbl-front
+    release: {{ .Release.Name }}
+  name: lbl-front-nodeport
+  namespace: {{ .Release.Namespace }}
+spec:
+  ports:
+  - name: lbl-front
+    port: {{ .Values.lblfrontPort }}
+    targetPort: lbl-front
+    nodePort:
+  type: NodePort
+  selector:
+    app: lbl-front
+    release: "{{ .Release.Name }}"

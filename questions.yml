@@ -1,0 +1,140 @@
+# @Author: nickchen
+# @Date:   2020-08-07T09:41:20+08:00
+# @Last modified by:   nickchen
+# @Last modified time: 2020-08-07T14:35:04+08:00
+categories:
+  - train-nickchen
+
+questions:
+  - variable: global.image.registry
+    default: ""
+    #description: "镜像地址"
+    type: string
+    label: 镜像地址
+    group: "全局 设置"
+    required: true
+  #eurekaserver配置
+  - variable: eurekaserver.enabled
+    default: true
+    #description: "是否打开审核微服务"
+    type: boolean
+    label: 是否打开eurekaserver
+    group: "eurekaserver 设置"
+    required: true
+
+  #eurekaserver7层网络配置
+  - variable: eurekaserver.ingress.enabled
+    default: true
+    description: "eurekaserver 使用 Layer 7 Load Balancer - ingress"
+    type: boolean
+    label: eurekaserver using Layer 7 Load Balancer
+    show_if: "eurekaserver.enabled=true"
+    show_subquestion_if: true
+    group: "eurekaserver 设置"
+    subquestions:
+    - variable: eurekaserver.ingress.hosts.eureka
+      default: "xip.io"
+      description: "layer 7 Load Balancer hostname"
+      type: hostname
+      required: true
+      label: Layer 7 Load Balancer Hostname
+      show_if: "eurekaserver.enabled=true&&eurekaserver.ingress.enabled=true"
+
+  #eservice-hello配置
+  - variable: servicehello.enabled
+    default: true
+    #description: "是否打开审核微服务"
+    type: boolean
+    label: 是否打开service-hello
+    group: "service-hello 设置"
+    required: true
+    show_subquestion_if: true
+    subquestions:
+    - variable: servicehello.message.name
+      default: "nickchen"
+      description: "你的名字"
+      type: string
+      required: true
+      label: name
+
+  #service-hello7层网络配置
+  - variable: servicehello.ingress.enabled
+    default: true
+    description: "service-hello 使用 Layer 7 Load Balancer - ingress"
+    type: boolean
+    label: service-hello using Layer 7 Load Balancer
+    show_if: "servicehello.enabled=true"
+    show_subquestion_if: true
+    group: "service-hello 设置"
+    subquestions:
+    - variable: servicehello.ingress.hosts.hello
+      default: "xip.io"
+      description: "layer 7 Load Balancer hostname"
+      type: hostname
+      required: true
+      label: Layer 7 Load Balancer Hostname
+      show_if: "servicehello.enabled=true&&servicehello.ingress.enabled=true"
+
+#xcx配置
+  - variable: xcx.enabled
+    default: true
+    #description: "是否打开审核微服务"
+    type: boolean
+    label: 是否打开xcx
+    group: "xcx 设置"
+    required: true
+    show_subquestion_if: true
+    subquestions:
+    - variable: xcx.message.name
+      default: "nickchen"
+      description: "你的名字"
+      type: string
+      required: true
+      label: name
+
+  #xcx7层网络配置
+  - variable: xcx.ingress.enabled
+    default: true
+    description: "xcx 使用 Layer 7 Load Balancer - ingress"
+    type: boolean
+    label: xcx using Layer 7 Load Balancer
+    show_if: "xcx.enabled=true"
+    show_subquestion_if: true
+    group: "xcx 设置"
+    subquestions:
+    - variable: xcx.ingress.hosts.hello
+      default: "xip.io"
+      description: "layer 7 Load Balancer hostname"
+      type: hostname
+      required: true
+      label: Layer 7 Load Balancer Hostname
+      show_if: "xcx.enabled=true&&xcx.ingress.enabled=true"
+
+#lbl-front配置
+  - variable: lblfront.enabled
+    default: true
+    #description: "是否打开审核微服务"
+    type: boolean
+    label: 是否打开lml-front
+    group: "lbl-front 设置"
+    required: true
+
+
+  #lblfront7层网络配置
+  - variable: lblfront.ingress.enabled
+    default: false
+    description: "lbl-front 使用 Layer 7 Load Balancer - ingress"
+    type: boolean
+    label: lvl-front using Layer 7 Load Balancer
+    show_if: "lblfront.enabled=true"
+    show_subquestion_if: true
+    group: "lbl-front 设置"
+    subquestions:
+    - variable: lblfront.ingress.hosts.hello
+      default: "xip.io"
+      description: "layer 7 Load Balancer hostname"
+      type: hostname
+      required: true
+      label: Layer 7 Load Balancer Hostname
+      show_if: "lblfront.enabled=true&&lblfront.ingress.enabled=true"
+
