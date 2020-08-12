@@ -25,7 +25,7 @@ spec:
         #image: {{ .Values.global.image.namespace }}:{{ .Values.global.image.tag }}
         imagePullPolicy: Always
         ports:
-          - containerPort: {{ .Values.lbl-frontPort }}
+          - containerPort: {{ .Values.lblfrontPort }}
             name: lbl-front
       dnsPolicy: ClusterFirst
       {{ if .Values.global.image.pullsecrets }}
