@@ -35,7 +35,7 @@ servicehello:
 xcx:
   enabled: true
   message:
-    nickname: haomingshi
+    nickname: xiemengfei
   ingress:
     enabled: false
     # Used to create an Ingress record.
