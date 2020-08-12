@@ -115,7 +115,7 @@ questions:
     default: true
     #description: "是否打开审核微服务"
     type: boolean
-    label: 是否打开lml-front
+    label: 是否打开lbl-front
     group: "lbl-front 设置"
     required: true
 
@@ -125,7 +125,7 @@ questions:
     default: false
     description: "lbl-front 使用 Layer 7 Load Balancer - ingress"
     type: boolean
-    label: lvl-front using Layer 7 Load Balancer
+    label: lbl-front using Layer 7 Load Balancer
     show_if: "lblfront.enabled=true"
     show_subquestion_if: true
     group: "lbl-front 设置"
