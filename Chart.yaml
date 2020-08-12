@@ -20,4 +20,4 @@ dependencies:
 description: A Helm chart for train
 name: train-nickchen
 type: application
-version: 0.1.1
+version: 0.1.3
